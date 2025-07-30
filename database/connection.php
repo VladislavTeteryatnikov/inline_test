@@ -1,7 +1,11 @@
 <?php
     require_once 'config.php';
 
-    function getConnection($selectDatabase = true) {
+    /**
+     * Подключение к MySql или к конкретной БД
+     * @param bool $selectDatabase Флаг, указывающий подключаемся к MySql или конкретной БД
+     */
+    function getConnection(bool $selectDatabase = true) {
         try {
             if ($selectDatabase) {
                 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);

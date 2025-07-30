@@ -1,11 +1,15 @@
 <?php
     require_once './database/connection.php';
 
+    /**
+     * Скрипт для консоли для копирования постов и комментариев в нашу БД
+     */
+
     try {
-        // Подключение к базе данных
+        //Подключение к базе данных
         $mysqli = getConnection();
 
-        // Скачивание постов
+        //Скачивание постов
         echo "Скачивание постов\n";
         $postsJson = file_get_contents('https://jsonplaceholder.typicode.com/posts');
         if (!$postsJson) {
@@ -13,7 +17,7 @@
         }
         $posts = json_decode($postsJson, true);
 
-        // Подготовка для вставки постов
+        //Подготовка для вставки постов
         $postsCount = 0;
         $stmt = $mysqli->prepare("INSERT INTO `posts` (`id`, `user_id`, `title`, `body`) VALUES (?, ?, ?, ?)");
         foreach ($posts as $post) {
@@ -27,7 +31,7 @@
         $stmt->close();
         echo "Посты скачаны\n";
 
-        // Скачивание комментариев
+        //Скачивание комментариев
         echo "Скачивание комментариев\n";
         $commentsJson = file_get_contents('https://jsonplaceholder.typicode.com/comments');
         if (!$commentsJson) {
@@ -35,7 +39,7 @@
         }
         $comments = json_decode($commentsJson, true);
 
-        // Подготовка для вставки комментариев
+        //Подготовка для вставки комментариев
         $commentsCount = 0;
         $stmt = $mysqli->prepare("INSERT INTO `comments` (`id`, `post_id`, `name`, `email`, `body`) VALUES (?, ?, ?, ?, ?)");
 
@@ -50,12 +54,12 @@
         $stmt->close();
         echo "Комментарии скачаны\n";
 
-        // Закрытие соединения
+
         $mysqli->close();
         echo "Загружено $postsCount постов и $commentsCount комментариев\n";
 
     } catch (Exception $e) {
-        // Закрытие соединения при ошибке
+
         if (isset($mysqli)) {
             $mysqli->close();
         }

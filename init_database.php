@@ -2,6 +2,10 @@
     require_once './database/config.php';
     require_once './database/connection.php';
 
+    /**
+     * Скрипт для консоли для создания БД и таблиц
+     */
+
     try {
         //Подключение к mysql
         $mysqli = getConnection(false);

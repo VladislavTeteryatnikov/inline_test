@@ -1,3 +1,5 @@
+-- Файл с sql запросами для сощдания БД
+
 -- Создание базы данных inline
 CREATE DATABASE IF NOT EXISTS `inline`
 CHARACTER SET utf8mb4

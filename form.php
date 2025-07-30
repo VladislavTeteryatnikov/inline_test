@@ -1,6 +1,10 @@
 <?php
     require_once './database/connection.php';
 
+    /**
+     * Форма поиска постов по комментариям
+     */
+
     // Подключение к базе данных
     $mysqli = getConnection();
 
@@ -8,6 +12,7 @@
     $data = [];
     $search = '';
 
+    //При гет-запросе
     if (isset($_GET['search'])) {
         $search = trim(htmlentities($_GET['search']));
 
